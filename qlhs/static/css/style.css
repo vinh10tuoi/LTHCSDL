@@ -1,0 +1,21 @@
+* {
+    font-family: Tahoma;
+}
+
+h1.text-center {
+    padding: 20px;
+    font-weight: bold;
+}
+
+ul.footer > li {
+    list-style-type: none;
+    padding: 5px;
+}
+
+ul.footer > li > a {
+    color: white;
+}
+
+h2, h4 {
+    padding-bottom: 5px;
+}

@@ -1,0 +1,20 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+    <h1 class="text-center text-primary">Thông tin học sinh</h1>
+
+    <div class="row">
+        <div class="col-md-4 col-sm-6">
+            <img src="{{ student.image }}" class="img-fluid" alt="{{ student.name }}"/>
+        </div>
+        <div class="col-md-8 col-sm-6">
+            <h2>{{ student.name }}</h2>
+            <h4>Ngày sinh: {{ student.birthday }}</h4>
+            <h4>Số điện thoại: {{ student.phone_number }}</h4>
+            <h4>Địa chỉ: {{ student.address }}</h4>
+            <h4>Email: {{ student.email }}</h4>
+        </div>
+    </div>
+
+
+{% endblock %}

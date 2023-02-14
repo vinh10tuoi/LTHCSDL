@@ -1,0 +1,75 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+    <h1 class="text-center text-primary">Bảng điểm học sinh</h1>
+
+    <div class="container">
+        <form action="/scores_details/{{ stud.id }}" method="post" class="form-control d-inline-flex">
+
+            <div class="m-3">
+                <select class="form-select" aria-label="Default select example" name="semester_name">
+                    <option selected>Chọn học kỳ</option>
+                    {% for s in sem %}
+                        <option value="{{ s.id }}">{{ s.name.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+
+            <div class="m-3">
+                <select class="form-select" aria-label="Default select example" name="subject_name">
+                    <option selected>Chọn môn học</option>
+                    {% for s in sub %}
+                        <option value="{{ s.id }}">{{ s.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="m-3">
+                <select class="form-select" aria-label="Default select example" name="year_name">
+                    <option selected>Chọn năm học</option>
+                    {% for y in year %}
+                        <option value="{{ y.id }}">{{ y.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="m-3">
+                <button class="btn btn-danger" type="submit">Xem</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="container mt-3">
+        {% if scores %}
+            <table class="table table-bordered text-center table-hover">
+                <thead class="table-warning">
+                <tr>
+                    <th>Họ tên</th>
+                    <th>Môn</th>
+                    <th>Học kì</th>
+                    <th>Năm học</th>
+                    {% for s in scores %}
+                        <th>{{ s.score }}</th>
+                    {% endfor %}
+                    <th>Điểm trung bình môn</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ stud.name }}</td>
+                    <td>{{ s.name }}</td>
+                    <td>{{ se.name.name }}</td>
+                    <td>{{ ye.name }}</td>
+                    {% for s in scores %}
+                        <td>{{ s.value }}</td>
+                    {% endfor %}
+                    <td>{{ "{:,.1f}".format(avg_scores) }}</td>
+                </tr>
+                </tbody>
+            </table>
+        {% else %}
+            <h1 class="text-center text-danger">Bảng điểm đang cập nhật...!</h1>
+        {% endif %}
+    </div>
+{% endblock %}

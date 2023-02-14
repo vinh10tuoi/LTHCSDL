@@ -1,0 +1,83 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+    <h1 class="text-center text-primary">Bảng điểm lớp</h1>
+
+    <div class="container">
+        <form action="/avg" method="post" class="form-control d-inline-flex">
+
+            <div class="m-3">
+                <select class="form-select" aria-label="Default select example" name="class_name">
+                    <option selected>Chọn lớp</option>
+                    {% for c in classes %}
+                        <option value="{{ c.id }}">{{ c.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="m-3">
+                <button class="btn btn-danger" type="submit">Chọn</button>
+            </div>
+
+
+            <div class="m-3">
+                <select class="form-select" aria-label="Default select example" name="student_name">
+                    <option selected>Chọn học sinh</option>
+                    {% for s in students %}
+                        <option value="{{ s.id }}">{{ s.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="m-3">
+                <select class="form-select" aria-label="Default select example" name="semester_name">
+                    <option selected>Chọn học kỳ</option>
+                    {% for s in semesters %}
+                        <option value="{{ s.id }}">{{ s.name.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="m-3">
+                <select class="form-select" aria-label="Default select example" name="year_name">
+                    <option selected>Chọn năm học</option>
+                    {% for y in years %}
+                        <option value="{{ y.id }}">{{ y.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="m-3">
+                <button class="btn btn-danger" type="submit">Xem</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="container mt-3">
+        {% if avg_scores %}
+            <table class="table table-bordered text-center table-hover">
+                <thead class="table-warning">
+                <tr>
+                    <th>Họ tên</th>
+                    <th>Lớp</th>
+                    <th>Học kì</th>
+                    <th>Năm học</th>
+                    <th>Điểm trung bình học kỳ</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ s.name }}</td>
+                    <td>{{ s.class }}</td>
+                    <td>{{ se.name.name }}</td>
+                    <td>{{ ye.name }}</td>
+                    <td>{{ "{:,.1f}".format(avg_scores) }}</td>
+                </tr>
+                </tbody>
+            </table>
+        {% else %}
+            <h1 class="text-center text-danger">Bảng điểm đang cập nhật...!</h1>
+        {% endif %}
+    </div>
+
+{% endblock %}

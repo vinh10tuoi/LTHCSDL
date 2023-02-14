@@ -1,0 +1,37 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+    {% if current_user.is_authenticated %}
+        {% if students %}
+            <h1 class="text-center text-primary">Danh sách học sinh của trường</h1>
+            <div class="row">
+                {% for s in students %}
+                    <div class="col-md-3 col-sm-12" style="padding:1rem;">
+                        <div class="card">
+                            <img class="card-img-top" src="{{ s.image }}" alt="{{ s.name }}">
+                            <div class="card-body">
+                                <h4 class="card-title">{{ s.name }}</h4>
+                                <p class="card-text">Giới tính: {% if s.gender.name == 'male' %} Nam {% else %}
+                                    Nữ {% endif %}</p>
+                                <a href="/students/{{ s.id }}" class="btn btn-primary">Thông tin</a>
+                                <a href="/scores_details/{{ s.id }}" class="btn btn-danger">Bảng điểm</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if pages > 1 %}
+                <ul class="pagination">
+                    {% for i in range(1, pages + 1) %}
+                        <li class="page-item"><a class="page-link" href="{{ url_for('index', page=i) }}">{{ i }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% else %}
+            <h1 class="text-danger text-center">Không có học sinh nào!</h1>
+        {% endif %}
+    {% else %}
+        <h1 class="text-center text-danger">Xin chào, vui lòng đăng nhập để thực hiện chức năng!</h1>
+    {% endif %}
+{% endblock %}
